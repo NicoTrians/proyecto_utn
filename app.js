@@ -12,6 +12,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var personasRouter = require('./routes/personas');
 var beneficiosRouter = require('./routes/beneficios');
+var inversionesRouter = require('./routes/inversiones');
+var jubiladosRouter = require('./routes/jubilados');
 
 
 var app = express();
@@ -30,6 +32,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/personas', personasRouter);
 app.use('/beneficios', beneficiosRouter);
+app.use('/inversiones', inversionesRouter);
+app.use('/jubilados', jubiladosRouter);
 
 //prueba de conexion a la base de datos
 pool.query('select * from usuarios').then(function (resultados) {
