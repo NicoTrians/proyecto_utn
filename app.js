@@ -10,6 +10,9 @@ var pool = require('./models/bd');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var personasRouter = require('./routes/personas');
+var beneficiosRouter = require('./routes/beneficios');
+
 
 var app = express();
 
@@ -25,23 +28,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/personas', personasRouter);
+app.use('/beneficios', beneficiosRouter);
 
 //prueba de conexion a la base de datos
-pool.query('select * from usuarios').then(function(resultados){
+pool.query('select * from usuarios').then(function (resultados) {
   console.log(resultados);
-}).catch(function(error){
+}).catch(function (error) {
   console.error('Error al conectar/consultar la base de datos:', error.message);
 });
 
 
 // catch 404 and forward to error handler
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
