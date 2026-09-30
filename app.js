@@ -14,7 +14,8 @@ var personasRouter = require('./routes/personas');
 var beneficiosRouter = require('./routes/beneficios');
 var inversionesRouter = require('./routes/inversiones');
 var jubiladosRouter = require('./routes/jubilados');
-
+var loginRouter = require('./routes/admin/login');
+var adminNovedadesRouter = require('./routes/admin/novedades');
 
 var app = express();
 
@@ -34,6 +35,8 @@ app.use('/personas', personasRouter);
 app.use('/beneficios', beneficiosRouter);
 app.use('/inversiones', inversionesRouter);
 app.use('/jubilados', jubiladosRouter);
+app.use('/login', loginRouter); // Se mantiene /login si el layout apunta allí
+app.use('/admin/novedades', adminNovedadesRouter);
 
 //prueba de conexion a la base de datos
 pool.query('select * from usuarios').then(function (resultados) {
