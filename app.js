@@ -17,6 +17,8 @@ var jubiladosRouter = require('./routes/jubilados');
 var loginRouter = require('./routes/admin/login');
 var adminNovedadesRouter = require('./routes/admin/novedades');
 
+var session = require('express-session');
+
 var app = express();
 
 // view engine setup
@@ -29,13 +31,40 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'utn_proyecto_secreto_key_98765',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Pasar datos de sesión a las vistas (layout)
+app.use(function (req, res, next) {
+  if (req.session && req.session.nombre) {
+    res.locals.nombre = req.session.nombre;
+    res.locals.usuario = req.session.nombre;
+    res.locals.id_usuario = req.session.id_usuario;
+  }
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/personas', personasRouter);
 app.use('/beneficios', beneficiosRouter);
 app.use('/inversiones', inversionesRouter);
 app.use('/jubilados', jubiladosRouter);
-app.use('/login', loginRouter); // Se mantiene /login si el layout apunta allí
+app.use('/login', loginRouter);
+app.use('/admin/login', loginRouter);
+app.post('/registro', function (req, res, next) {
+  req.url = '/registro';
+  loginRouter(req, res, next);
+});
+app.get('/logout', function (req, res) {
+  if (req.session) {
+    req.session.destroy();
+  }
+  res.redirect('/');
+});
 app.use('/admin/novedades', adminNovedadesRouter);
 
 //prueba de conexion a la base de datos
