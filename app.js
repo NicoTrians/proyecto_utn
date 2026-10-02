@@ -16,6 +16,7 @@ var inversionesRouter = require('./routes/inversiones');
 var jubiladosRouter = require('./routes/jubilados');
 var loginRouter = require('./routes/admin/login');
 var adminNovedadesRouter = require('./routes/admin/novedades');
+var perfilRouter = require('./routes/perfil');
 
 var session = require('express-session');
 
@@ -55,6 +56,7 @@ app.use('/inversiones', inversionesRouter);
 app.use('/jubilados', jubiladosRouter);
 app.use('/login', loginRouter);
 app.use('/admin/login', loginRouter);
+app.use('/perfil', perfilRouter);
 app.post('/registro', function (req, res, next) {
   req.url = '/registro';
   loginRouter(req, res, next);

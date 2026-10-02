@@ -1,0 +1,87 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4 p-md-5">
+
+          <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+            <h2 class="fw-bold mb-0">Mi Perfil</h2>
+            <span class="badge bg-primary fs-6">Usuario Conectado</span>
+          </div>
+
+          {{#if success}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {{/if}}
+
+          <form action="/perfil/modificar-direccion" method="POST" class="row g-3">
+            <div class="col-12">
+              <p class="text-muted mb-2">
+                Los datos personales son de solo lectura. Únicamente podés modificar tu <strong>Dirección</strong>.
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <label for="perfilNombre" class="form-label fw-semibold">Nombre</label>
+              <input type="text" class="form-control bg-light" id="perfilNombre" value="{{usuario.nombre}}" readonly tabindex="-1">
+            </div>
+
+            <div class="col-md-6">
+              <label for="perfilApellido" class="form-label fw-semibold">Apellido</label>
+              <input type="text" class="form-control bg-light" id="perfilApellido" value="{{usuario.apellido}}" readonly tabindex="-1">
+            </div>
+
+            <div class="col-md-6">
+              <label for="perfilEdad" class="form-label fw-semibold">Edad</label>
+              <input type="text" class="form-control bg-light" id="perfilEdad" value="{{usuario.edad}}" readonly tabindex="-1">
+            </div>
+
+            <div class="col-md-6">
+              <label for="perfilDni" class="form-label fw-semibold">DNI</label>
+              <input type="text" class="form-control bg-light" id="perfilDni" value="{{usuario.dni}}" readonly tabindex="-1">
+            </div>
+
+            <div class="col-12">
+              <label for="perfilCelular" class="form-label fw-semibold">Celular</label>
+              <input type="text" class="form-control bg-light" id="perfilCelular" value="{{usuario.celular}}" readonly tabindex="-1">
+            </div>
+
+            <div class="col-12">
+              <label for="perfilDireccion" class="form-label fw-bold text-primary">Dirección (Modificable)</label>
+              <input type="text" class="form-control border-primary" id="perfilDireccion" name="direccion" value="{{usuario.direccion}}" placeholder="Ingresá tu nueva dirección" required>
+              <div class="form-text text-primary">Podés editar este campo y presionar "Guardar Dirección".</div>
+            </div>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-primary px-4 py-2">Guardar Dirección</button>
+            </div>
+          </form>
+
+          <hr class="my-5">
+
+          <div class="p-3 bg-light rounded border border-danger-subtle">
+            <h5 class="fw-bold text-danger mb-2">Zona de Peligro</h5>
+            <p class="text-muted small mb-3">
+              Al presionar este botón, tu usuario será eliminado permanentemente de la base de datos sin confirmación.
+            </p>
+            <form action="/perfil/eliminar" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger px-4">Borrar usuario de la base de datos</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

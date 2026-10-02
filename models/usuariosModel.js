@@ -30,6 +30,48 @@ async function getUserByDni(dni) {
 }
 
 /**
+ * Busca un usuario por su ID.
+ */
+async function getUserById(id) {
+    try {
+        var query = 'select * from usuarios where id = ? limit 1';
+        var rows = await pool.query(query, [id]);
+        return rows[0];
+    } catch (error) {
+        console.error('Error en getUserById:', error);
+        throw error;
+    }
+}
+
+/**
+ * Modifica la dirección de un usuario por su ID.
+ */
+async function updateDireccion(id, direccion) {
+    try {
+        var query = 'update usuarios set direccion = ? where id = ?';
+        var rows = await pool.query(query, [direccion, id]);
+        return rows;
+    } catch (error) {
+        console.error('Error en updateDireccion:', error);
+        throw error;
+    }
+}
+
+/**
+ * Elimina un usuario de la base de datos por su ID.
+ */
+async function deleteUsuario(id) {
+    try {
+        var query = 'delete from usuarios where id = ?';
+        var rows = await pool.query(query, [id]);
+        return rows;
+    } catch (error) {
+        console.error('Error en deleteUsuario:', error);
+        throw error;
+    }
+}
+
+/**
  * Inserta un nuevo usuario en la base de datos con contraseña hasheada en md5.
  */
 async function insertUsuario(usuario) {
@@ -68,6 +110,9 @@ async function getUserAndPassword(user, password) {
 module.exports = {
     getUserByDniAndPassword,
     getUserByDni,
+    getUserById,
+    updateDireccion,
+    deleteUsuario,
     insertUsuario,
     getUserAndPassword
 };
