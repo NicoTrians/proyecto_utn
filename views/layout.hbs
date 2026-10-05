@@ -61,20 +61,20 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Pedir Tarjeta</a></li>
+              <li><a class="dropdown-item" href="#">Pedir Tarjeta (próximamente)</a></li>
             </ul>
           </li>
         </ul>
         {{#if nombre}}
-          <div class="d-flex align-items-center gap-2">
-            <span class="navbar-text fw-bold text-dark me-2">
-              Hola, {{nombre}}!
-            </span>
-            <a class="btn btn-outline-primary btn-sm" href="/perfil">Mi Perfil</a>
-            <a class="btn btn-outline-danger btn-sm" href="/login/logout">Cerrar sesión</a>
-          </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="navbar-text fw-bold text-dark me-2">
+            Hola, {{nombre}}!
+          </span>
+          <a class="btn btn-outline-primary btn-sm" href="/perfil">Mi Perfil</a>
+          <a class="btn btn-outline-danger btn-sm" href="/login/logout">Cerrar sesión</a>
+        </div>
         {{else}}
-          <a class="btn btn-outline-success" href="/login">Iniciar Sesion / Registrarse</a>
+        <a class="btn btn-outline-success" href="/login">Iniciar Sesion / Registrarse</a>
         {{/if}}
       </div>
     </div>

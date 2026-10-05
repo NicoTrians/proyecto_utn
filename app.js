@@ -15,7 +15,6 @@ var beneficiosRouter = require('./routes/beneficios');
 var inversionesRouter = require('./routes/inversiones');
 var jubiladosRouter = require('./routes/jubilados');
 var loginRouter = require('./routes/admin/login');
-var adminNovedadesRouter = require('./routes/admin/novedades');
 var perfilRouter = require('./routes/perfil');
 
 var session = require('express-session');
@@ -67,7 +66,6 @@ app.get('/logout', function (req, res) {
   }
   res.redirect('/');
 });
-app.use('/admin/novedades', adminNovedadesRouter);
 
 //prueba de conexion a la base de datos
 pool.query('select * from usuarios').then(function (resultados) {
